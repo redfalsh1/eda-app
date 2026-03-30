@@ -24,10 +24,45 @@ find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets)
 set(SOURCES
     src/main.cpp
     src/mainwindow.cpp
+    
+    # 版图核心
+    src/layout/layout_types.cpp
+    src/layout/layout_cell.cpp
+    src/layout/layout_database.cpp
+    
+    # 插件系统
+    src/plugin/plugin_loader.cpp
+    src/plugin/plugin_manager.cpp
+    
+    # DRC 框架
+    src/drc/drc_engine.cpp
+    src/drc/drc_rules.cpp
+    
+    # 几何库
+    src/geometry/point.cpp
+    src/geometry/polygon.cpp
 )
 
 set(HEADERS
     include/mainwindow.h
+    
+    # 版图核心
+    include/layout/layout_types.h
+    include/layout/layout_cell.h
+    include/layout/layout_database.h
+    
+    # 插件系统
+    include/plugin/plugin_interface.h
+    include/plugin/plugin_manager.h
+    include/plugin/plugin_loader.h
+    
+    # DRC 框架
+    include/drc/drc_types.h
+    include/drc/drc_engine.h
+    
+    # 几何库
+    include/geometry/point.h
+    include/geometry/polygon.h
 )
 
 # 创建可执行文件
