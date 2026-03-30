@@ -1,0 +1,116 @@
+# C++/Qt/CMake .gitignore
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+build/
+!**/CMakeLists.txt
+
+# Qt
+*.moc
+*.qrc.cpp
+*.ui
+*.qmlc
+*.jsc
+.rcc_cache/
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Libs
+*.so
+*.dylib
+*.dll
+*.lib
+*.a
+*.la
+
+# Compiled Executables
+*.exe
+*.out
+*.app
+*.bin
+*.elf
+
+# Dependency directories
+deps/
+vendor/
+
+# IDE
+.idea/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build directories
+bin/
+lib/
+dist/
+Release/
+Debug/
+x64/
+x86/
+
+# Test
+Testing/
+TestResults.xml
+*.gcno
+*.gcda
+coverage/
+
+# Packaging
+*.deb
+*.rpm
+*.msi
+*.exe
+*.dmg
+*.pkg
+CPackConfig.cmake
+CPackSourceConfig.cmake
+_install/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+
+# Environment
+.env
+.env.local
+*.local
+
+# vcpkg
+vcpkg/
+installed/
+downloads/
+vcpkg.json
+
+# Conan
+conanfile.txt
+conanbuildinfo.txt
+conaninfo.txt
+
+# Documentation generated
+docs/html/
+docs/latex/
