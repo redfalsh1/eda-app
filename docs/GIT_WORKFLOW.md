@@ -1,6 +1,6 @@
-# Git 开发规范 - 统一账号 + 角色标签
+# Git 开发规范 - 统一账号 + 角色标签 + Token 认证
 
-**版本**: v1.0  
+**版本**: v1.1  
 **最后更新**: 2026-03-30  
 **维护**: eda_tech_lead
 
@@ -29,6 +29,105 @@ git config user.email "redfalsh1@users.noreply.github.com"
 ```bash
 git config user.name
 git config user.email
+```
+
+---
+
+## 🔑 Token 认证配置
+
+### ⚠️ 重要：使用 Token 替代 SSH
+
+从 2026-03-30 起，团队统一使用 **GitHub Token** 进行认证，不再使用 SSH Key。
+
+### 1️⃣ 获取 Token
+
+**方法 A: 使用 GitHub CLI（推荐）**
+```bash
+gh auth token
+```
+
+**方法 B: GitHub 网页生成**
+1. 访问：https://github.com/settings/tokens
+2. 点击 "Generate new token (classic)"
+3. 选择 scopes: `repo`, `workflow`, `read:org`
+4. 生成并复制 Token
+
+### 2️⃣ 配置 Token
+
+**Windows (PowerShell)**:
+```powershell
+# 设置环境变量（当前会话）
+$env:GH_TOKEN="gho_xxxxxxxxxxxxxxxxxxxx"
+
+# 或者永久设置
+[Environment]::SetEnvironmentVariable("GH_TOKEN", "gho_xxxxxxxxxxxxxxxxxxxx", "User")
+```
+
+**Linux/macOS (Bash)**:
+```bash
+# 添加到 ~/.bashrc 或 ~/.zshrc
+export GH_TOKEN="gho_xxxxxxxxxxxxxxxxxxxx"
+
+# 或者使用 git credential
+git config --global credential.helper store
+```
+
+### 3️⃣ 配置 Git 使用 HTTPS
+
+```bash
+# 查看当前 remote
+git remote -v
+
+# 如果是 SSH 格式，改为 HTTPS
+git remote set-url origin https://github.com/redfalsh1/eda-app.git
+
+# 或者重新添加
+git remote remove origin
+git remote add origin https://github.com/redfalsh1/eda-app.git
+```
+
+### 4️⃣ 验证 Token
+
+```bash
+# 测试 Token 是否有效
+curl -H "Authorization: token $env:GH_TOKEN" https://api.github.com/user
+
+# 或者使用 gh CLI
+gh auth status
+```
+
+### 5️⃣ Git 推送测试
+
+```bash
+# 拉取
+git pull origin dev
+
+# 推送
+git push origin dev
+```
+
+---
+
+## 🔐 Token 安全注意事项
+
+### 不要做
+- ❌ 不要将 Token 提交到 Git
+- ❌ 不要在日志中打印 Token
+- ❌ 不要分享给团队成员以外的人
+- ❌ 不要硬编码到脚本中
+
+### 要做
+- ✅ 使用环境变量存储 Token
+- ✅ 定期轮换 Token（每 90 天）
+- ✅ 仅在团队成员间共享
+- ✅ 使用 `.gitignore` 排除敏感文件
+
+### .gitignore 更新
+```
+# Token 和环境变量
+.env
+*.env
+.env.local
 ```
 
 ---
